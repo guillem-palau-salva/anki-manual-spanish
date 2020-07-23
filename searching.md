@@ -1,305 +1,310 @@
-# Searching
+# Buscando
 
-Anki's Browse screen and the Filtered Deck feature use a common method
-of searching for specific cards/notes.
+La pantalla de exploración de Anki y la función de cubierta filtrada utilizan un método común
+de búsqueda de tarjetas/notas específicas.
 
-## Simple searches
+## Búsquedas simples
 
-When you type some text into the search box, Anki finds matching notes
-and displays their cards. Anki searches in all fields of the notes, but
-does not search for tags (see later in this section for how to search
-for tags). Some examples:
+Cuando escribe texto en el cuadro de búsqueda, Anki encuentra notas coincidentes
+y muestra sus cartas. Anki busca en todos los campos de las notas, pero
+no busca etiquetas (consulte más adelante en esta sección cómo buscar
+para etiquetas). Algunos ejemplos:
 
-`dog`  
-search for "dog" - will match words like "doggy" and "underdog" too.
+`perro`
+buscar "perro": también coincidirá con palabras como "perros" y "perroflauta".
 
-`dog cat`  
-finds notes that have both "dog" and "cat" on them, such as "raining
-cats and dogs"".
+`perro gato`
+encuentra notas que tienen tanto "perro" como "gato", como "lloviendo
+gatos y perros".
 
-`dog or cat`  
-finds notes with either "dog" or "cat".
+`perro or gato`
+encuentra notas con "perro" o "gato". 
 
-`dog (cat or mouse)`  
-finds notes with dog and cat, or dog and mouse.
+`perro (gato or ratón)`
+encuentra notas con perro y gato, o perro y ratón.
 
-`-cat`  
-finds notes without the word "cat".
+`-gato`
+encuentra notas sin la palabra "gato".
 
-`-cat -mouse`  
-finds notes with neither "cat" nor "mouse".
+`-gato -ratón`
+no encuentra notas ni con "gato" ni con "ratón".
 
-`-(cat or mouse)`  
-same as the above.
+`-(gato or ratón)`
+igual que el anterior.
 
-`"a dog"`  
-finds notes with the exact sequence of characters "a dog" on them, such
-as "atta dog", but not "dog a" or "adog".
+`"un perro"`
+encuentra notas con la secuencia exacta de caracteres "un perro" en ellos, como
+como "aun perro", pero no como "unperro" o "perro un".
 
-`-"a dog"`  
-finds notes without the exact phrase "a dog"
+`-"un perro"`
+encuentra notas sin la frase exacta "un perro".
 
-`d_g`  
-finds notes with d, &lt;a letter&gt;, g, like dog, dig, dug, and so on.
+`p_rro`
+encuentra notas con p, una letra, y "rro", como parro, perro, purro, etc.
 
-`d*g`  
-finds notes with d, &lt;zero or more letters&gt;, g, like dg, dog, dung,
+`p*rro`
+encuentra notas con p, cero o más letras, y"rro", como prro, perro, puerro, patarro
 etc.
 
-`w:dog`  
-search for "dog" on a word boundary - will match "dog", but not "doggy"
-or "underdog". Requires Anki 2.1.24+ or AnkiMobile 2.1.61+.
+`w:perro`
+buscar "perro" en el límite de una palabra: coincidirá con "perro", pero no con "perros"
+o "perroflauta". Requiere Anki 2.1.24+ o AnkiMobile 2.1.61+.
 
-`w:dog*`  
-will match "dog" and "doggy", but not "underdog".
+`w:perro*`
+coincidirá con "perro" y "perros" y "perroflauta", pero no con "enperro".
 
-`w:*dog`  
-will match "dog" and "underdog", but not "doggy".
+`w:*perro`
+coincidirá con "perro" y "enperro", pero no con "perros" y "perroflauta".
 
-Things to note from the above:
 
-- Search terms are separated by spaces.
+Cosas a tener en cuenta de lo anterior:
 
-- When multiple search terms are provided, Anki looks for notes that
-  match all of the terms - an implicit 'and' is inserted between each
-  term. On Anki 2.1.24+ and AnkiMobile 2.0.60+ you can be explicit
-  if you like ("dog and cat" is the same as "dog cat"), but older
-  Anki versions will treat "and" as just another word to search for.
+- Los términos de búsqueda están separados por espacios.
 
-- You can use "or" if you only need one of the terms to match.
+- Cuando se proporcionan varios términos de búsqueda, Anki busca notas que
+  coincide con todos los términos: se inserta un 'y' implícito entre cada
+  término. En Anki 2.1.24+ y AnkiMobile 2.0.60+ puedes ser explícito
+  si lo desea ("perro and gato" (and es "y" en inglés) es lo mismo que "perro gato"), pero versiones más
+  antiguas de Anki tratarán "and" como una palabra más para buscar.
 
-- You can prepend a minus sign to a term to find notes that don’t
-  match.
+- Puede usar "or" ("o") si solo necesita uno de los términos para que coincida.
 
-- If you want to search for something including a space or
-  parenthesis, enclose it in double quotes. You can quote either the
-  `"entire:term"`, or just the `part:"after a colon"`.
+- Puede anteponer un signo de negación ("-") a un término para buscar notas que no
+  partido.
 
-- You can group search terms by placing them in parentheses, as in the
-  **dog (cat or mouse)** example. This becomes important when
-  combining OR and AND searches — in the example, with the
-  parentheses, it matches either 'dog cat' or 'dog mouse', whereas
-  without them it would match either 'dog and cat' or 'mouse'.
+- Si desea buscar algo, incluido un espacio o
+  paréntesis, debe de ir entre comillas dobles ("). Puedes citar cualquiera de los
+  `"la palabra: entera"`, o simplemente la `parte:"despúes de punto y coma"`.
 
-- Anki is only able to search within formatting in the [sort
-  field](editing.md#customizing-fields) you’ve configured. For example, if you add
-  "**exa**mple" to one of your fields, this will not be matched when
-  searching for "example" unless that field is the sort field. If a
-  word is not formatted, or the formatting does not change in the
-  middle of the word, then Anki will be able to find it in any field.
+- Puede agrupar los términos de búsqueda colocándolos entre paréntesis, como en el
+  ejemplo de **perro (gato or ratón)**. Esto se vuelve importante cuando
+  combina búsquedas OR y AND - en el ejemplo, con el
+  paréntesis, coincide con 'perro gato' o 'perro ratón', mientras que
+  sin ellos, coincidiría con 'perro y gato' o 'ratón'.
 
-## Limiting to a field
+- Anki solo puede buscar dentro del formato en [campo de clasificación](editing.md#customizing-fields) que ha configurado. Por ejemplo, si agrega
+  "**ej**emplo" a uno de sus campos, esto no se igualará cuando
+  busque "ejemplo" a menos que ese campo sea el campo de clasificación. Si una
+  palabra no está formateada o el formato no cambia en la
+  a mitad de la palabra, entonces Anki podrá encontrarlo en cualquier campo.
+  
+## Limitando a un campo
 
-You can also ask Anki to match only if a particular field contains some
-text. Unlike the searches above, searching on fields requires an 'exact
-match' by default.
+También puede pedirle a Anki que coincida solo si un campo en particular contiene
+texto. A diferencia de las búsquedas anteriores, la búsqueda en los campos requiere un "exacto
+partido 'por defecto.
 
-`front:dog`  
-find notes with a Front field of exactly "dog". A field that says "a
-dog" will not match.
+`front:perro`
+encuentra notas con un campo frontal de exactamente "perro". Un campo que dice "a
+perro "no coincidirá.
 
-`front:*dog*`  
-find notes with Front field containing dog somewhere
+`front:*perro*`
+encuentra notas con el campo frontal que contiene perro en algún lugar-
 
-`front:`  
-find notes that have an empty Front field
+`front:`
+encuentra notas que tengan un campo frontal vacío.
 
-`front:_*`  
-find notes that have a non-empty Front field
+`front:_*`
+encuentra notas que tengan un campo frontal no vacío.
 
-`front:*`  
-find notes that have a Front field, empty or not
+`front:*`
+encuentra notas que tengan un campo frontal, vacío o no
 
 `fr*:text`
-find notes in a field starting with "fr". Requires Anki 2.1.24+ or AnkiMobile 2.1.60+.
+encuentra notas en un campo que comience con "fr". Requiere Anki 2.1.24+ o AnkiMobile 2.1.60+.
 
-## Tags, decks, cards and notes
+## Etiquetas, mazos, tarjetas y notas
 
-`tag:animal`  
-find notes with the tag "animal"
+`tag:animal`
+encuentra notas con la etiqueta "animal".
 
-`tag:none`  
-find notes with no tags
+`tag:none`
+encuentra notas sin etiquetas.
 
-`tag:ani*`  
-find notes with tags starting with ani
+`tag:ani*`
+encuentra notas con etiquetas que comienzan con "ani".
 
-`deck:french`  
-find cards in a French deck, or subdecks like French::Vocab
+`deck:francés`
+encuentra tarjetas en el mazo "francés", o submazos como "francés::Vocabulario".
 
-`deck:french -deck:french::*`  
-find cards in French, but not subdecks
+`deck:francés -deck:francés::*`
+encuentra tarjetas en el mazo francés, pero no en ninguno de sus submazos.
 
-`deck:"french vocab"`  
-searching when a deck has a space
+`deck:"vocabulario francés"`
+encuentra cuando un mazo tiene un espacio en el nombre.
 
-`"deck:french vocab"`  
-also ok
+`"deck:vocabulario francés"`
+otra opción válida para el caso anterior.
 
-`deck:filtered`  
-filtered decks only
+`deck:filtered` 
+mazos filtrados solamente.
 
-`-deck:filtered`  
-normal decks only
+`-deck:filtered` 
+mazos normales solamente.
 
-`card:forward`  
-search for Forward cards
+`card:forward`
+buscar tarjetas de tipo "forward".
 
-`card:1`  
-search for cards by template number - eg, to find the second cloze
-deletion for a note, you’d use card:2
+`card:1`
+buscar tarjetas por número de plantilla, por ejemplo, para encontrar la segunda pregunta anidada
+de una nota, usaría la card:2.
 
-`note:basic`  
-search for cards with a Basic note type
+`note:Básico`
+encuentra tarjetas con un tipo de nota Básica.
 
-## Ignoring accents/combining characters
+## Ignorando acentos / combinando caracteres
 
-Requires Anki 2.1.24+ or AnkiMobile 2.0.60+.
+Requiere Anki 2.1.24+ o AnkiMobile 2.0.60+.
 
-You can use `nc:` to remove combining characters ("no combining"). For example:
+Puede usar `nc:` para eliminar los caracteres combinados ("sin combinación"). Por ejemplo:
 
-`nc:uber`  
-matches notes with "uber", "über", "Über" and so on.
+`nc:básico`
+hace conicidir las notas con "basico", "básico", etc.
 
-`nc:は`  
-matches "は", "ば", and "ぱ"
+`nc:uber`
+hace coincidir las notas con "uber", "über", "Über", etc.
 
-Searches that ignore combining characters are slower than regular searches.
+`nc:は`
+coincide con "は", "ば" y "ぱ".
 
-## Regular expressions
+Las búsquedas que ignoran la combinación de caracteres son más lentas que las búsquedas normales.
 
-Anki 2.1.24+ and AnkiMobile 2.0.60+ support searching in notes with "regular expressions",
-a standard and powerful way of searching in text.
+## Expresiones regulares
 
-Start a search with `re:` to search by regular expression. Some examples:
+Anki 2.1.24+ y AnkiMobile 2.0.60+ admiten búsquedas en notas con "expresiones regulares",
+Una forma estándar y poderosa de búsqueda en texto.
 
-`"re:(some|another).*thing"`  
-find notes that have "some" or "another" on them, followed by 0 or more characters, and then "thing"
+Inicie una búsqueda con `re:` para buscar por expresión regular. Algunos ejemplos:
 
-`re:\d{3}`  
-find notes that have 3 digits in a row
+`"re:(algún|otro).*cosa"`
+encuentra notas que tengan "algún" u "otro", seguidos de 0 o más caracteres, y luego "cosa".
 
-Regular expressions can also be limited to a specific field. Please note that unlike the normal searches
-in a specific field, regular expressions in fields don't require an exact match. Eg:
+`re:\d{3}`
+encontraa notas que tienen 3 dígitos consecutivos.
 
-`front:re:[a-c]1`  
-matches uppercase or lowercase a1, B1 or c1 that occurs anywhere in the "Front" field
+Las expresiones regulares también se pueden limitar a un campo específico. Tenga en cuenta que a diferencia de las búsquedas normales
+en un campo específico, las expresiones regulares en los campos no requieren una coincidencia exacta. P.ej:
 
-`front:re:^[a-c]1$`  
-like the above, but will not match if any other text falls before or after a1/b1/c1.
+`front:re:[a-c]1`
+coincide con mayúsculas o minúsculas a1, B1 o c1 que se produce en cualquier parte del campo "Front".
 
-You can learn more about regular expressions here: https://regexone.com/lesson/introduction_abcs
+`front:re:^[a-c]1$`
+como el caso anterior, pero no coincidirá si algún otro texto se situa antes o después de a1/b1/c1.
 
-Some things to be aware of:
+Puede obtener más información sobre las expresiones regulares aquí: https://regexone.com/lesson/introduction_abcs
 
-- The search is case-insensitive by default; use (?-i) at the start to turn on case sensitivity.
-- Some text like spaces and newlines may be represented differently in HTML - you can
-  use the HTML editor in the editing screen to see the underlying HTML contents.
-- For the specifics of Anki's regex support, please see the regex crate documentation: https://docs.rs/regex/1.3.9/regex/#syntax
+Algunas cosas a tener en cuenta:
 
-## Card state
+- La búsqueda no distingue entre mayúsculas y minúsculas por defecto; use (? -i) al comienzo para activar la distinción entre mayúsculas y minúsculas.
+- Algunos textos, como espacios y líneas nuevas, pueden representarse de manera diferente en HTML; puede
+   usar el editor HTML en la pantalla de edición para ver el contenido HTML subyacente.
+- Para los detalles del soporte de expresiones regulares de Anki, consulte la documentación de la caja de expresiones regulares: https://docs.rs/regex/1.3.9/regex/#syntax
 
-`is:due`  
-review cards and learning cards waiting to be studied
 
-`is:new`  
-new cards
+## Estado de la tarjeta
 
-`is:learn`  
-cards in learning
+`is:due`
+Revisar tarjetas y tarjetas de aprendizaje esperando ser estudiadas.
 
-`is:review`  
-reviews (both due and not due) and lapsed cards
+`is:new`
+tarjetas nuevas.
 
-`is:suspended`  
-cards that have been manually suspended
+`is:learn`
+tarjetas en aprendizaje.
 
-`is:buried`  
-cards that have been buried, either [automatically](studying.md#siblings-and-burying) or
-manually
+`is:review`
+revisiones (tanto vencidas como no vencidas) y tarjetas caducadas.
 
-Cards that have lapsed fall into several of these categories, so it may
-be useful to combine them to get more precise results:
+`is:suspended`
+tarjetas que han sido suspendidas manualmente.
 
-`is:learn is:review`  
-cards that have lapsed and are awaiting relearning
+`is:buried`
+tarjetas que han sido enterradas, ya sea [automáticamente](study.md#siblings-and-enterying) o
+manialmente.
 
-`-is:learn is:review`  
-review cards, not including lapsed cards
+Las tarjetas que han caducado caen en varias de estas categorías, por lo que puede
+sea ​​útil combinarlas para obtener resultados más precisos:
 
-`is:learn -is:review`  
-cards that are in learning for the first time
+`is:learn is:review`
+tarjetas que han caducado y están esperando volver a aprender.
 
-## Card properties
+`-is:learn is:review`
+tarjetas de revisión, sin incluir las tarjetas caducadas.
 
-`prop:ivl>=10`  
-cards with interval of 10 days or more
+`is:learn -is:review`
+tarjetas que se están aprendiendo por primera vez.
 
-`prop:due=1`  
-cards due tomorrow
 
-`prop:due=-1`  
-cards due yesterday that haven’t been answered yet
+## Propiedades de la tarjeta
 
-`prop:due>-1 prop:due<1`  
-cards due between yesterday and tomorrow
+`prop:ivl>=10`
+tarjetas cuyo intervalo es de 10 días o más.
 
-`prop:reps<10`  
-cards that have been answered less than 10 times
+`prop:due=1`
+tarjetas para revisar mañana.
 
-`prop:lapses>3`  
-cards that have moved into relearning more than 3 times
+`prop:due=-1`
+tarjetas que vencen ayer y que aún no han sido respondidas.
 
-`prop:ease!=2.5`  
-cards easier or harder than default
+`prop:due>-1 prop:due<1`
+tarjetas de vencimiento entre ayer y mañana.
 
-Note that due only matches review cards and learning cards with an
-interval of a day or more: cards in learning with small intervals like
-10 minutes are not included.
+`prop:reps<10`
+tarjetas que han sido respondidas menos de 10 veces.
 
-## Recently added
+`prop:lapses>3`
+tarjetas que han pasado al reaprendizaje más de 3 veces.
 
-`added:1`  
-cards added today
+`prop:ease!=2.5`
+tarjetas más fáciles o más difíciles que las predeterminadas.
 
-`added:7`  
-cards added in last week
+Tenga en cuenta que "due" solo coincide con las tarjetas de revisión y las tarjetas de aprendizaje con un
+intervalo de un día o más: tarjetas en el aprendizaje con pequeños intervalos como
+10 minutos no están incluidas.
 
-The check is made against card creation time rather than note creation
-time, so cards that were generated within the time frame will be
-included even if their notes were added a long time ago.
+## Recientemente añadido
 
-## Recently answered
+`added:1`
+tarjetas añadidas hoy.
 
-`rated:1`  
-cards answered today
+`added:7`
+tarjetas añadidas la semana pasada.
 
-`rated:1:2`  
-cards answered Hard (2) today
+La verificación se realiza contra el tiempo de creación de la tarjeta en lugar del de la creación de notas
+por lo que las tarjetas que se generaron dentro del marco de tiempo serán
+incluidas incluso si sus notas se agregaron hace mucho tiempo.
 
-`rated:7:1`  
-cards answered Again (1) over the last 7 days
+## Recientemente contestado
 
-`rated:31:4`  
-cards answered Easy (4) in the last month
+`rated:1`
+tarjetas contestadas hoy.
 
-For speed, rating searches are limited to 31 days.
+`rated:1:2`
+tarjetas contestadas difícil (2) hoy.
 
-## Object IDs
+`rated:7:1`
+tarjetas respondidas de nuevo (1) en los últimos 7 días.
 
-`nid:123`  
-all cards of the note with note id 123
+`rated:31:4`
+tarjetas respondidas fácil (4) en el último mes.
 
-`cid:123`  
-the card with card id 123
+Por eficiencia, las búsquedas de calificación están limitadas a 31 días.
 
-`mid:123`  
-find note types with note type id 123
+## ID de objeto
 
-Note and card IDs can be found in the [card info](stats.md) dialog in the
-browser. Note type IDs can be found by clicking on a note type in the
-Browse screen. These searches may also be helpful when doing add-on
-development or otherwise working closely with the database.
+`nid:123`
+todas las tarjetas de la nota con nota ID 123.
 
-Object IDs will not work in the mobile clients, and are not intended to
-be used in filtered decks at the moment.
+`cid:123`
+la tarjeta con ID de tarjeta 123.
+
+`mid:123`
+encontrar tipos de notas con el ID de tipo de nota 123.
+
+Las notas y las ID de las tarjetas se pueden encontrar en el cuadro de diálogo [información de la tarjeta](stats.md) en el
+navegador. Los ID de tipo de nota se pueden encontrar haciendo clic en un tipo de nota en el
+explorador. Estas búsquedas también pueden ser útiles al hacer desarollo de 
+complementos o de otra manera trabajando estrechamente con la base de datos.
+
+Los ID de objeto no funcionarán en los clientes móviles y no están destinados a
+ser utilizado en mazos filtrados en este momento.
